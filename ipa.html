@@ -440,30 +440,55 @@
 <li class="li ul-li list-dash-li compact-li" data-line="86;out/introduction.mdk:26"><span data-line="86;out/introduction.mdk:26"></span>Safe: inconsistency expressed as return types</li></ul></li></ul></div><h2 id="sec-type-system" class="h1" data-line="87;out/types.mdk:1" data-heading-depth="1" style="display:block"><span data-line="87;out/types.mdk:1"></span><span class="heading-before"><span class="heading-label">2</span>.&#8194;</span><span data-line="87;out/types.mdk:1"></span>Type System</h2>
 <div class="notes" data-line="87;out/types.mdk:2" style="color:gray;font-size:90%;font-family:Lato-Light">
 <ul class="ul list-dash compact" data-line="87;out/types.mdk:3">
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:3"><span data-line="87;out/types.mdk:3"></span>IPA type lattice
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:3"><span data-line="87;out/types.mdk:3"></span>High-level goals
 
 <ul class="ul list-dash compact" data-line="87;out/types.mdk:4">
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:4"><span data-line="87;out/types.mdk:4"></span>Inconsistent (<span data-line="87;out/types.mdk:4"></span><span class="math-inline">$\bot$</span><span data-line="87;out/types.mdk:4"></span>)
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:4"><span data-line="87;out/types.mdk:4"></span>Explicit performance bounds (latency)
 </li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:5"><span data-line="87;out/types.mdk:5"></span><code class="code code1">Rushed | Interval | Leased</code><span data-line="87;out/types.mdk:5"></span> 
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:5"><span data-line="87;out/types.mdk:5"></span>Explicit approximation bounds (error tolerance)
 </li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:6"><span data-line="87;out/types.mdk:6"></span>Consistent (<span data-line="87;out/types.mdk:6"></span><span class="math-inline">$\top$</span><span data-line="87;out/types.mdk:6"></span>)
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:6"><span data-line="87;out/types.mdk:6"></span>Results in IPA types which express the resulting uncertainty
 </li></ul></li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:7"><span data-line="87;out/types.mdk:7"></span>Performance bounds
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:7"><span data-line="87;out/types.mdk:7"></span>ADTs
 
 <ul class="ul list-dash compact" data-line="87;out/types.mdk:8">
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:8"><span data-line="87;out/types.mdk:8"></span><code class="code code1">Set[ID] with Consistency(Strong)</code><span data-line="87;out/types.mdk:8"></span>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:8"><span data-line="87;out/types.mdk:8"></span>can<span data-line="87;out/types.mdk:8"></span>&#39;<span data-line="87;out/types.mdk:8"></span>t just express these on the <span data-line="87;out/types.mdk:8"></span><em class="em-star1">read</em><span data-line="87;out/types.mdk:8"></span> side, most require knowing how the <span data-line="87;out/types.mdk:8"></span><em class="em-star1">write</em><span data-line="87;out/types.mdk:8"></span> was done
 </li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:9"><span data-line="87;out/types.mdk:9"></span><code class="code code1">Set[ID] with LatencyBound(50 ms) -&gt; contains(ID): Rushed[Boolean]</code><span data-line="87;out/types.mdk:9"></span>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:9"><span data-line="87;out/types.mdk:9"></span>e.g. <span data-line="87;out/types.mdk:9"></span><code class="code code1">Consistency = Read.Consistency + Write.Consistency</code><span data-line="87;out/types.mdk:9"></span>, so <span data-line="87;out/types.mdk:9"></span><code class="code code1">Write.ALL + Read.ONE = Strong</code><span data-line="87;out/types.mdk:9"></span>, or <span data-line="87;out/types.mdk:9"></span><code class="code code1">Write.QUORUM + Read.QUORUM = Strong</code><span data-line="87;out/types.mdk:9"></span>
 </li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:10"><span data-line="87;out/types.mdk:10"></span><code class="code code1">Counter with ErrorTolerance(5%) -&gt; read(): Interval[Long]</code><span data-line="87;out/types.mdk:10"></span>
-</li></ul></li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:11"><span data-line="87;out/types.mdk:11"></span>Semantics of mixed consistency levels?
-</li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:12"><span data-line="87;out/types.mdk:12"></span>Futures
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:10"><span data-line="87;out/types.mdk:10"></span>Other benefits of annotating ADTs:
 
-<ul class="ul list-dash compact" data-line="87;out/types.mdk:13">
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:13"><span data-line="87;out/types.mdk:13"></span>(talk about how everything is implemented with futures, or just elide that?)</li></ul></li></ul></div><h2 id="sec-implementation" class="h1" data-line="88;out/implementation.mdk:1" data-heading-depth="1" style="display:block"><span data-line="88;out/implementation.mdk:1"></span><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span><span data-line="88;out/implementation.mdk:1"></span>Implementation</h2>
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:11">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:11"><span data-line="87;out/types.mdk:11"></span>portable / reusable
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:12"><span data-line="87;out/types.mdk:12"></span>modular
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:13"><span data-line="87;out/types.mdk:13"></span>Similar to Indigo<span data-line="87;out/types.mdk:13"></span>&#39;<span data-line="87;out/types.mdk:13"></span>s (<span data-line="87;out/types.mdk:13"></span>[@Indigo]<span data-line="87;out/types.mdk:13"></span>) invariants, but expressing performance and approximation bounds
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:14"><span data-line="87;out/types.mdk:14"></span><strong class="strong-star2">Bounds</strong><span data-line="87;out/types.mdk:14"></span>
+
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:15">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:15"><span data-line="87;out/types.mdk:15"></span><code class="code code1">Set[ID] with Consistency(Strong)</code><span data-line="87;out/types.mdk:15"></span>
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:16"><span data-line="87;out/types.mdk:16"></span><code class="code code1">Set[ID] with LatencyBound(50 ms) -&gt; contains(ID): Rushed[Boolean]</code><span data-line="87;out/types.mdk:16"></span>
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:17"><span data-line="87;out/types.mdk:17"></span><code class="code code1">Counter with ErrorTolerance(5%) -&gt; read(): Interval[Long]</code><span data-line="87;out/types.mdk:17"></span>
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:18"><span data-line="87;out/types.mdk:18"></span>IPA type lattice
+
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:19">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:19"><span data-line="87;out/types.mdk:19"></span>Inconsistent (<span data-line="87;out/types.mdk:19"></span><span class="math-inline">$\bot$</span><span data-line="87;out/types.mdk:19"></span>)
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:20"><span data-line="87;out/types.mdk:20"></span><code class="code code1">Rushed | Interval | Leased</code><span data-line="87;out/types.mdk:20"></span> 
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:21"><span data-line="87;out/types.mdk:21"></span>Consistent (<span data-line="87;out/types.mdk:21"></span><span class="math-inline">$\top$</span><span data-line="87;out/types.mdk:21"></span>)
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:22"><span data-line="87;out/types.mdk:22"></span>Semantics of mixed consistency levels?
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:23"><span data-line="87;out/types.mdk:23"></span>Futures
+
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:24">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:24"><span data-line="87;out/types.mdk:24"></span>(talk about how everything is implemented with futures, or just elide that?)</li></ul></li></ul></div><h2 id="sec-implementation" class="h1" data-line="88;out/implementation.mdk:1" data-heading-depth="1" style="display:block"><span data-line="88;out/implementation.mdk:1"></span><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span><span data-line="88;out/implementation.mdk:1"></span>Implementation</h2>
 <p class="p noindent" data-line="88;out/implementation.mdk:2"><span data-line="88;out/implementation.mdk:2"></span>We demonstrate one possible instantiation of the Disciplined Inconsistency model with an implementation of a Scala client, using Cassandra as the backing store. Most of the functionality required to implement the model is relatively datastore-agnostic; most Dynamo-style datastores support some form of tunable consistency, so porting our implementation to another backing datastore such as Riak should be possible.
 </p>
 <p class="p indent" data-line="88;out/implementation.mdk:4"><span data-line="88;out/implementation.mdk:4"></span><span id="todo" style="color:red;font-size:small;font-family:Lato-Light">[explain the basics of how Cassandra&#39;s consistency levels work]</span><span data-line="88;out/implementation.mdk:4"></span>
