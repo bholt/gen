@@ -465,30 +465,61 @@
 </li></ul></li>
 <li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:13"><span data-line="87;out/types.mdk:13"></span>Similar to Indigo<span data-line="87;out/types.mdk:13"></span>&#39;<span data-line="87;out/types.mdk:13"></span>s (<span data-line="87;out/types.mdk:13"></span>[@Indigo]<span data-line="87;out/types.mdk:13"></span>) invariants, but expressing performance and approximation bounds
 </li></ul></li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:14"><span data-line="87;out/types.mdk:14"></span><strong class="strong-star2">Bounds</strong><span data-line="87;out/types.mdk:14"></span>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:14"><span data-line="87;out/types.mdk:14"></span>Types of annotation
 
 <ul class="ul list-dash compact" data-line="87;out/types.mdk:15">
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:15"><span data-line="87;out/types.mdk:15"></span><code class="code code1">Set[ID] with Consistency(Strong)</code><span data-line="87;out/types.mdk:15"></span>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:15"><span data-line="87;out/types.mdk:15"></span>&#8220;static&#8221;<span data-line="87;out/types.mdk:15"></span> bounds like <span data-line="87;out/types.mdk:15"></span><code class="code code1">Consistency(Strong)</code><span data-line="87;out/types.mdk:15"></span> that fix a policy upfront
 </li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:16"><span data-line="87;out/types.mdk:16"></span><code class="code code1">Set[ID] with LatencyBound(50 ms) -&gt; contains(ID): Rushed[Boolean]</code><span data-line="87;out/types.mdk:16"></span>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:16"><span data-line="87;out/types.mdk:16"></span>&#8220;dynamic&#8221;<span data-line="87;out/types.mdk:16"></span> bounds like <span data-line="87;out/types.mdk:16"></span><code class="code code1">LatencyBound(50 ms)</code><span data-line="87;out/types.mdk:16"></span> that choose a policy at invocation time
 </li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:17"><span data-line="87;out/types.mdk:17"></span><code class="code code1">Counter with ErrorTolerance(5%) -&gt; read(): Interval[Long]</code><span data-line="87;out/types.mdk:17"></span>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:17"><span data-line="87;out/types.mdk:17"></span>per-method bounds for ADTs (e.g. <span data-line="87;out/types.mdk:17"></span><code class="code code1">Set[ID]</code><span data-line="87;out/types.mdk:17"></span> has <span data-line="87;out/types.mdk:17"></span><code class="code code1">size</code><span data-line="87;out/types.mdk:17"></span> and <span data-line="87;out/types.mdk:17"></span><code class="code code1">contains?</code><span data-line="87;out/types.mdk:17"></span> methods that could have different bounds)
 </li></ul></li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:18"><span data-line="87;out/types.mdk:18"></span>IPA type lattice
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:18"><span data-line="87;out/types.mdk:18"></span><strong class="strong-star2">Bounds</strong><span data-line="87;out/types.mdk:18"></span>
 
 <ul class="ul list-dash compact" data-line="87;out/types.mdk:19">
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:19"><span data-line="87;out/types.mdk:19"></span>Inconsistent (<span data-line="87;out/types.mdk:19"></span><span class="math-inline">$\bot$</span><span data-line="87;out/types.mdk:19"></span>)
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:19"><span data-line="87;out/types.mdk:19"></span><code class="code code1">Set[ID] with Consistency(Strong)</code><span data-line="87;out/types.mdk:19"></span>
 </li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:20"><span data-line="87;out/types.mdk:20"></span><code class="code code1">Rushed | Interval | Leased</code><span data-line="87;out/types.mdk:20"></span> 
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:20"><span data-line="87;out/types.mdk:20"></span><code class="code code1">Set[ID] with LatencyBound(50 ms) -&gt; contains(ID): Rushed[Boolean]</code><span data-line="87;out/types.mdk:20"></span>
 </li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:21"><span data-line="87;out/types.mdk:21"></span>Consistent (<span data-line="87;out/types.mdk:21"></span><span class="math-inline">$\top$</span><span data-line="87;out/types.mdk:21"></span>)
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:21"><span data-line="87;out/types.mdk:21"></span><code class="code code1">Counter with ErrorTolerance(5%) -&gt; read(): Interval[Long]</code><span data-line="87;out/types.mdk:21"></span>
 </li></ul></li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:22"><span data-line="87;out/types.mdk:22"></span>Semantics of mixed consistency levels?
-</li>
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:23"><span data-line="87;out/types.mdk:23"></span>Futures
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:22"><span data-line="87;out/types.mdk:22"></span>IPA type lattice
 
-<ul class="ul list-dash compact" data-line="87;out/types.mdk:24">
-<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:24"><span data-line="87;out/types.mdk:24"></span>(talk about how everything is implemented with futures, or just elide that?)</li></ul></li></ul></div><h2 id="sec-implementation" class="h1" data-line="88;out/implementation.mdk:1" data-heading-depth="1" style="display:block"><span data-line="88;out/implementation.mdk:1"></span><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span><span data-line="88;out/implementation.mdk:1"></span>Implementation</h2>
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:23">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:23"><span data-line="87;out/types.mdk:23"></span>Inconsistent (<span data-line="87;out/types.mdk:23"></span><span class="math-inline">$\bot$</span><span data-line="87;out/types.mdk:23"></span>)
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:24"><span data-line="87;out/types.mdk:24"></span><code class="code code1">Rushed | Interval | Leased</code><span data-line="87;out/types.mdk:24"></span> 
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:25"><span data-line="87;out/types.mdk:25"></span>Consistent (<span data-line="87;out/types.mdk:25"></span><span class="math-inline">$\top$</span><span data-line="87;out/types.mdk:25"></span>)
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:26"><span data-line="87;out/types.mdk:26"></span>Rushed
+
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:27">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:27"><span data-line="87;out/types.mdk:27"></span>Consistency level achieved
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:28"><span data-line="87;out/types.mdk:28"></span>Interval
+
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:29">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:29"><span data-line="87;out/types.mdk:29"></span>min, max, contains?, etc
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:30"><span data-line="87;out/types.mdk:30"></span>linearizable within the error bound<span data-line="87;out/types.mdk:30"></span> <span data-line="87;out/types.mdk:30"></span>&#8211;<span data-line="87;out/types.mdk:30"></span> as long as we stay within the bound, everything is strongly consistent
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:31"><span data-line="87;out/types.mdk:31"></span>Leased goes away
+</li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:32"><span data-line="87;out/types.mdk:32"></span>Semantics of mixed consistency levels?
+
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:33">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:33"><span data-line="87;out/types.mdk:33"></span>If every operation comes back strong, it<span data-line="87;out/types.mdk:33"></span>&#39;<span data-line="87;out/types.mdk:33"></span>s just like strong consistency was chosen in advance<span data-line="87;out/types.mdk:33"></span> <span data-line="87;out/types.mdk:33"></span>&#8211;<span data-line="87;out/types.mdk:33"></span> so everything is linearizable
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:34"><span data-line="87;out/types.mdk:34"></span>Futures
+
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:35">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:35"><span data-line="87;out/types.mdk:35"></span>(talk about how everything is implemented with futures, or just elide that?)
+</li></ul></li>
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:36"><span data-line="87;out/types.mdk:36"></span>All writes are statically at a certain consistency level
+
+<ul class="ul list-dash compact" data-line="87;out/types.mdk:37">
+<li class="li ul-li list-dash-li compact-li" data-line="87;out/types.mdk:37"><span data-line="87;out/types.mdk:37"></span>Why? So we don<span data-line="87;out/types.mdk:37"></span>&#39;<span data-line="87;out/types.mdk:37"></span>t have to reason about interactions with reads (would need flow analysis)</li></ul></li></ul></div><h2 id="sec-implementation" class="h1" data-line="88;out/implementation.mdk:1" data-heading-depth="1" style="display:block"><span data-line="88;out/implementation.mdk:1"></span><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span><span data-line="88;out/implementation.mdk:1"></span>Implementation</h2>
 <p class="p noindent" data-line="88;out/implementation.mdk:2"><span data-line="88;out/implementation.mdk:2"></span>We demonstrate one possible instantiation of the Disciplined Inconsistency model with an implementation of a Scala client, using Cassandra as the backing store. Most of the functionality required to implement the model is relatively datastore-agnostic; most Dynamo-style datastores support some form of tunable consistency, so porting our implementation to another backing datastore such as Riak should be possible.
 </p>
 <p class="p indent" data-line="88;out/implementation.mdk:4"><span data-line="88;out/implementation.mdk:4"></span><span id="todo" style="color:red;font-size:small;font-family:Lato-Light">[explain the basics of how Cassandra&#39;s consistency levels work]</span><span data-line="88;out/implementation.mdk:4"></span>
