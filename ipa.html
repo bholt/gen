@@ -421,21 +421,21 @@ this balance in an unpredictable environment where a black and blue
 dress<span data-line="114;out/introduction.mdk:36"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#buzzfeed-dress" title="Dao Nguyen. 
 What it&#39;s like to work on buzzfeed&#39;s tech team during record traffic." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">36</span></a>]</span><span data-line="114;out/introduction.mdk:36"></span> or Justin Bieber<span data-line="114;out/introduction.mdk:36"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#bieber-instagram" title="Cade Metz. 
 How Instagram Solved Its Justin Bieber Problem, November 2015." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">32</span></a>]</span><span data-line="114;out/introduction.mdk:36"></span> can
-significantly change application performance in the blink of an eye.
+change application performance in the blink of an eye.
 </p>
 <p class="p indent" data-line="114;out/introduction.mdk:39"><span data-line="114;out/introduction.mdk:39"></span>Recognizing this trade-off, many existing storage systems support
 configureable consistency levels; some allow programmers to set the
 consistency of the entire store or each operation, while other provide
 adaptable consistency SLAs.  Ideally, programmers would weaken
-consistency guarantees only when it is necessary (e.g., a spike in
-traffic or datacenter failure) to meet availability requirements, or
-when it does not impact the application<span data-line="114;out/introduction.mdk:45"></span>&#39;<span data-line="114;out/introduction.mdk:45"></span>s correctness guarantees
-(e.g., returning a slightly stale or estimated result is acceptable).
-Unfortunately, if programmers are <span data-line="114;out/introduction.mdk:47"></span><em class="em-star1">undisciplined</em><span data-line="114;out/introduction.mdk:47"></span> in their use of
-weakly consistent data (i.e., writing back to storage based on
-inconsistent reads), they can easily corrupt application data,
-lowering the consistency of the storage system to that of the weakest
-read or write operation.
+consistency guarantees only when it is necessary to meet performance
+requirements (e.g., during a spike in traffic or datacenter failure),
+or when it does not impact the application<span data-line="114;out/introduction.mdk:45"></span>&#39;<span data-line="114;out/introduction.mdk:45"></span>s correctness guarantees
+(e.g., if returning a slightly stale or estimated result is
+acceptable).  Unfortunately, if programmers are <span data-line="114;out/introduction.mdk:47"></span><em class="em-star1">undisciplined</em><span data-line="114;out/introduction.mdk:47"></span> in
+their use of weakly consistent data (i.e., updating the storage system
+based on inconsistent reads), they can easily corrupt application
+data, lowering the consistency of the storage system to that of the
+weakest read or write operation.
 </p>
 <p class="p indent" data-line="114;out/introduction.mdk:53"><span data-line="114;out/introduction.mdk:53"></span>In this paper, we propose a more disciplined approach to consistency:
 the <span data-line="114;out/introduction.mdk:54"></span><em class="em-star1">inconsistent, performance-bound, approximate (IPA)</em><span data-line="114;out/introduction.mdk:54"></span> programming
