@@ -540,7 +540,15 @@ spikes.
 <p class="p indent" data-line="120;out/background.mdk:31"><span data-line="120;out/background.mdk:31"></span>While this solves the programmer<span data-line="120;out/background.mdk:31"></span>&#39;<span data-line="120;out/background.mdk:31"></span>s performance problem, it introduces
 data consistency problem.  Suppose that the ticket sales application
 wants to raise the price of the last 100 tickets for each showing to
-<span data-line="120;out/background.mdk:34"></span><span class="math-inline">$20, similar to Uber&#39;s surge pricing.  If the application uses astrongly consistent read to fetch the remaining ticket count, then itcan use that value to compute the price of the ticket on the lastscreen in Figure [@fig-tickets]. However, if the programmer choses toweaken the consistency of that read, then he must be careful whenusing it to calculate a purchase. Done in an undisciplined way, theapplication may over or under charge some users depending on theconsistency of the returned value.  Worse, the theater would expect tomake exactly $</span><span data-line="120;out/background.mdk:42"></span>2000 on the last 100 tickets for each showing with the
+<span data-line="120;out/background.mdk:34"></span>&#36;<span data-line="120;out/background.mdk:34"></span>, similar to Uber<span data-line="120;out/background.mdk:34"></span>&#39;<span data-line="120;out/background.mdk:34"></span>s surge pricing.  If the application uses a
+strongly consistent read to fetch the remaining ticket count, then it
+can use that value to compute the price of the ticket on the last
+screen in Figure<span data-line="120;out/background.mdk:37"></span> [@fig-tickets]<span data-line="120;out/background.mdk:37"></span>. However, if the programmer choses to
+weaken the consistency of that read, then he must be careful when
+using it to calculate a purchase. Done in an undisciplined way, the
+application may over or under charge some users depending on the
+consistency of the returned value.  Worse, the theater would expect to
+make exactly <span data-line="120;out/background.mdk:42"></span>&#36;<span data-line="120;out/background.mdk:42"></span>2000 on the last 100 tickets for each showing with the
 new pricing model, which may not be true with the new weaker read
 operation.
 </p>
