@@ -456,7 +456,7 @@ In Proceedings of the Twenty-Fourth ACM Symposium on Operating Systems Principle
 doi:10.1145/2517349.2522731." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">62</span></a>]</span><span data-line="119;out/introduction.mdk:56"></span>.
 Unfortunately, if programmers are <span data-line="119;out/introduction.mdk:57"></span><em class="em-star1">undisciplined</em><span data-line="119;out/introduction.mdk:57"></span> in their use of data
 from weakly consistent operations, they can corrupt strongly
-consistent stored data, lowering the consistency of the storage system
+consistent, stored data, lowering the consistency of the storage system
 to that of the weakest read or write operation.
 </p>
 <p class="p indent" data-line="119;out/introduction.mdk:62"><span data-line="119;out/introduction.mdk:62"></span>In this paper, we propose a more disciplined approach to consistency:
@@ -468,40 +468,41 @@ explicit endorsement. IPA provides the following:
 </p>
 <ul class="ul list-star loose" data-line="119;out/introduction.mdk:69">
 <li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:69">
-<p data-line="119;out/introduction.mdk:69"><span data-line="119;out/introduction.mdk:69"></span><em class="em-star1">Error SLAs.</em><span data-line="119;out/introduction.mdk:69"></span> IPA is a data structure store, like Redis<span data-line="119;out/introduction.mdk:69"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#redis" title="Salvatore Sanfilippo. 
-Redis." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">55</span></a>]</span><span data-line="119;out/introduction.mdk:69"></span> or
- Riak<span data-line="119;out/introduction.mdk:70"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#riak" title="Basho Technologies, Inc. 
-Riak." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">11</span></a>]</span><span data-line="119;out/introduction.mdk:70"></span>, allowing it to provide both traditional performance
- bounds and novel error bounds (e.g., the programmer can bound the
- returned value to within 5<span data-line="119;out/introduction.mdk:72"></span>%<span data-line="119;out/introduction.mdk:72"></span> of the correct value). Within these
- bounds, IPA automatically adapts to provide the strongest
- consistency possible under the current system load.
-</p></li>
-<li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:76">
-<p data-line="119;out/introduction.mdk:76"><span data-line="119;out/introduction.mdk:76"></span><em class="em-star1">IPA consistency types.</em><span data-line="119;out/introduction.mdk:76"></span> IPA defines the consistency and correctness
+<p data-line="119;out/introduction.mdk:69"><span data-line="119;out/introduction.mdk:69"></span><em class="em-star1">IPA consistency types.</em><span data-line="119;out/introduction.mdk:69"></span> IPA defines the consistency and correctness
  of every returned value using a new type system that allows
  programmers to reason about their use of data at different
  consistency levels and make decisions based on the actual
  consistency of returned values.
 </p></li>
-<li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:82">
-<p data-line="119;out/introduction.mdk:82"><span data-line="119;out/introduction.mdk:82"></span><em class="em-star1">Consistency safety.</em><span data-line="119;out/introduction.mdk:82"></span> IPA enforces the disciplined use of IPA
- consistency types by requiring programmers to handle all potential
- consistency cases, or explicitly endorse the propagation of
- inconsistent values.
+<li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:75">
+<p data-line="119;out/introduction.mdk:75"><span data-line="119;out/introduction.mdk:75"></span><em class="em-star1">IPA type checker.</em><span data-line="119;out/introduction.mdk:75"></span> IPA enforces the disciplined use of IPA
+ consistency types statically at compile time by requiring
+ programmers to handle all potential consistency cases, or
+ explicitly endorse the propagation of inconsistent values.
+</p></li>
+<li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:80">
+<p data-line="119;out/introduction.mdk:80"><span data-line="119;out/introduction.mdk:80"></span><em class="em-star1">Error bounds.</em><span data-line="119;out/introduction.mdk:80"></span> IPA is a data structure store, like Redis<span data-line="119;out/introduction.mdk:80"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#redis" title="Salvatore Sanfilippo. 
+Redis." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">55</span></a>]</span><span data-line="119;out/introduction.mdk:80"></span>
+ or Riak<span data-line="119;out/introduction.mdk:81"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#riak" title="Basho Technologies, Inc. 
+Riak." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">11</span></a>]</span><span data-line="119;out/introduction.mdk:81"></span>, allowing it to provide both traditional
+ performance bounds on storage operations, as well as error bounds
+ (e.g., the programmer can bound the returned value to within 5<span data-line="119;out/introduction.mdk:83"></span>%<span data-line="119;out/introduction.mdk:83"></span> of
+ the correct value). Within these bounds, IPA automatically adapts
+ to return a value with the strongest IPA consistency type possible
+ under the current system load.
 </p></li></ul>
 
-<p class="p noindent" data-line="119;out/introduction.mdk:87"><span data-line="119;out/introduction.mdk:87"></span>We implement an IPA prototype based on Scala and Cassandra and show
+<p class="p noindent" data-line="119;out/introduction.mdk:88"><span data-line="119;out/introduction.mdk:88"></span>We implement an IPA prototype based on Scala and Cassandra and show
 that IPA allows the programmer to trade off performance and
 consistency, safe in the knowledge that the type system has checked
 the program for consistency safety. We demonstrate experimentally that
 these mechanisms allow applications to dynamically adapt correctness
 and performance to changing conditions with three applications: a
-simple counter, a Twitter clone based on Retwis<span data-line="119;out/introduction.mdk:93"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#retwis" title="Salvatore Sanfilippo. 
+simple counter, a Twitter clone based on Retwis<span data-line="119;out/introduction.mdk:94"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#retwis" title="Salvatore Sanfilippo. 
 Design and implementation of a simple Twitter clone using PHP and the Redis key-value store. 
-http://&#8203;redis.&#8203;io/&#8203;topics/&#8203;twitter-&#8203;clone, 2015b." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">56</span></a>]</span><span data-line="119;out/introduction.mdk:93"></span> and a Ticket
-sales service modeled after FusionTicket<span data-line="119;out/introduction.mdk:94"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#fusionticket" title="Fusion ticket. 
-http://&#8203;fusionticket.&#8203;org." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">1</span></a>]</span><span data-line="119;out/introduction.mdk:94"></span>. 
+http://&#8203;redis.&#8203;io/&#8203;topics/&#8203;twitter-&#8203;clone, 2015b." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">56</span></a>]</span><span data-line="119;out/introduction.mdk:94"></span> and a Ticket
+sales service modeled after FusionTicket<span data-line="119;out/introduction.mdk:95"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#fusionticket" title="Fusion ticket. 
+http://&#8203;fusionticket.&#8203;org." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">1</span></a>]</span><span data-line="119;out/introduction.mdk:95"></span>. 
 </p><h2 id="sec-background" class="h1" data-line="120;out/background.mdk:1" data-heading-depth="1" style="display:block"><span data-line="120;out/background.mdk:1"></span><span class="heading-before"><span class="heading-label">2</span>.&#8194;</span><span data-line="120;out/background.mdk:1"></span>The Case for Consistency Safety</h2>
 <p class="p noindent" data-line="120;out/background.mdk:3"><span data-line="120;out/background.mdk:3"></span>There are many popular news stories about how services like BuzzFeed<span data-line="120;out/background.mdk:3"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#buzzfeed-dress" title="Dao Nguyen. 
 What it&#39;s like to work on buzzfeed&#39;s tech team during record traffic." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">43</span></a>]</span><span data-line="120;out/background.mdk:3"></span> and Instagram<span data-line="120;out/background.mdk:3"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#bieber-instagram" title="Cade Metz. 
