@@ -456,40 +456,40 @@ In Proceedings of the Twenty-Fourth ACM Symposium on Operating Systems Principle
 doi:10.1145/2517349.2522731." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">62</span></a>]</span><span data-line="119;out/introduction.mdk:56"></span>.
 Unfortunately, if programmers are <span data-line="119;out/introduction.mdk:57"></span><em class="em-star1">undisciplined</em><span data-line="119;out/introduction.mdk:57"></span> in their use of data
 from weakly consistent operations, they can corrupt strongly
-consistent, stored data, lowering the consistency of the storage system
+consistent stored data, lowering the consistency of the storage system
 to that of the weakest read or write operation.
 </p>
-<p class="p indent" data-line="119;out/introduction.mdk:62"><span data-line="119;out/introduction.mdk:62"></span>In this paper, we propose a more disciplined approach to consistency:
-the <span data-line="119;out/introduction.mdk:63"></span><em class="em-star1">inconsistent, performance-bound, approximate (IPA)</em><span data-line="119;out/introduction.mdk:63"></span> storage
-system. IPA<span data-line="119;out/introduction.mdk:64"></span>&#39;<span data-line="119;out/introduction.mdk:64"></span>s programming model provides a type system for which type
-safety implies <span data-line="119;out/introduction.mdk:65"></span><em class="em-star1">consistency safety:</em><span data-line="119;out/introduction.mdk:65"></span> values from weakly consistent
-operations cannot flow into stronger consistency operations without
-explicit endorsement. IPA provides the following:
+<p class="p indent" data-line="119;out/introduction.mdk:62"><span data-line="119;out/introduction.mdk:62"></span>In this paper, we propose a more disciplined approach to inconsistency
+in the <span data-line="119;out/introduction.mdk:63"></span><em class="em-star1">inconsistent, performance-bound, approximate (IPA)</em><span data-line="119;out/introduction.mdk:63"></span> storage
+system. IPA introduces the following concepts:
 </p>
-<ul class="ul list-star loose" data-line="119;out/introduction.mdk:69">
-<li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:69">
-<p data-line="119;out/introduction.mdk:69"><span data-line="119;out/introduction.mdk:69"></span><em class="em-star1">IPA consistency types.</em><span data-line="119;out/introduction.mdk:69"></span> IPA defines the consistency and correctness
- of every returned value using a new type system that allows
- programmers to reason about their use of data at different
- consistency levels and make decisions based on the actual
- consistency of returned values.
+<ul class="ul list-star loose" data-line="119;out/introduction.mdk:66">
+<li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:66">
+<p data-line="119;out/introduction.mdk:66"><span data-line="119;out/introduction.mdk:66"></span><em class="em-star1">Consistency Safety</em><span data-line="119;out/introduction.mdk:66"></span>, a new property that ensures that values from
+weakly consistent operations cannot flow into stronger consistency
+operations without explicit endorsement from the programmer.  IPA is
+the first storage system to provide consistency safety.
 </p></li>
-<li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:75">
-<p data-line="119;out/introduction.mdk:75"><span data-line="119;out/introduction.mdk:75"></span><em class="em-star1">IPA type checker.</em><span data-line="119;out/introduction.mdk:75"></span> IPA enforces the disciplined use of IPA
- consistency types statically at compile time by requiring
- programmers to handle all potential consistency cases, or
- explicitly endorse the propagation of inconsistent values.
+<li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:71">
+<p data-line="119;out/introduction.mdk:71"><span data-line="119;out/introduction.mdk:71"></span><em class="em-star1">Consistency Types.</em><span data-line="119;out/introduction.mdk:71"></span>, a new type system for which <span data-line="119;out/introduction.mdk:71"></span><em class="em-star1">type safety
+implies consistency safety</em><span data-line="119;out/introduction.mdk:72"></span>. Consistency types define the
+consistency and correctness of the returned value from every IPA
+operation, allowing programmers to reason about their use of
+different consistency levels.  IPA<span data-line="119;out/introduction.mdk:75"></span>&#39;<span data-line="119;out/introduction.mdk:75"></span>s type checker enforces the
+disciplined use of IPA consistency types statically at compile time
+by requiring programmers to handle all potential consistency cases,
+or explicitly endorse the propagation of inconsistent values.
 </p></li>
 <li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:80">
-<p data-line="119;out/introduction.mdk:80"><span data-line="119;out/introduction.mdk:80"></span><em class="em-star1">Error bounds.</em><span data-line="119;out/introduction.mdk:80"></span> IPA is a data structure store, like Redis<span data-line="119;out/introduction.mdk:80"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#redis" title="Salvatore Sanfilippo. 
-Redis." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">55</span></a>]</span><span data-line="119;out/introduction.mdk:80"></span>
- or Riak<span data-line="119;out/introduction.mdk:81"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#riak" title="Basho Technologies, Inc. 
-Riak." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">11</span></a>]</span><span data-line="119;out/introduction.mdk:81"></span>, allowing it to provide both traditional
- performance bounds on storage operations, as well as error bounds
- (e.g., the programmer can bound the returned value to within 5<span data-line="119;out/introduction.mdk:83"></span>%<span data-line="119;out/introduction.mdk:83"></span> of
- the correct value). Within these bounds, IPA automatically adapts
- to return a value with the strongest IPA consistency type possible
- under the current system load.
+<p data-line="119;out/introduction.mdk:80"><span data-line="119;out/introduction.mdk:80"></span><em class="em-star1">Error-bounded Consistency.</em><span data-line="119;out/introduction.mdk:80"></span> IPA is a data structure store, like
+Redis<span data-line="119;out/introduction.mdk:81"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#redis" title="Salvatore Sanfilippo. 
+Redis." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">55</span></a>]</span><span data-line="119;out/introduction.mdk:81"></span> or Riak<span data-line="119;out/introduction.mdk:81"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#riak" title="Basho Technologies, Inc. 
+Riak." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">11</span></a>]</span><span data-line="119;out/introduction.mdk:81"></span>, allowing it to provide both
+traditional performance bounds on storage operations, as well as
+error bounds (e.g., the programmer can bound the returned value to
+within 5<span data-line="119;out/introduction.mdk:84"></span>%<span data-line="119;out/introduction.mdk:84"></span> of the correct value). Within these bounds, IPA
+automatically adapts to return a value with the strongest IPA
+consistency type possible under the current system load.
 </p></li></ul>
 
 <p class="p noindent" data-line="119;out/introduction.mdk:88"><span data-line="119;out/introduction.mdk:88"></span>We implement an IPA prototype based on Scala and Cassandra and show
