@@ -418,46 +418,46 @@ Distributed applications and web services, such as online stores or social netwo
 <p class="p noindent" data-line="119;out/introduction.mdk:35"><span data-line="119;out/introduction.mdk:35"></span>To provide good user experiences, modern datacenter applications and
 web services must balance many competing requirements.  Programmers
 need to preserve application correctness while minimizing response
-times. For example, a web store must ensure that it never
-double-charges for a purchase and shows up-to-date stock and ensure
-that it keep user engagement high (e.g., Microsoft, Amazon and Google
-all note that every millisecond of latency translates to a loss in
-traffic and revenue<span data-line="119;out/introduction.mdk:42"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#forrest09:slow" title="Brady Forrest. 
+times; e.g., a web store must not double-charge for purchases and not
+keeping users waiting too long (e.g., Microsoft, Amazon and Google all
+note that every millisecond of latency translates to a loss in traffic
+and revenue<span data-line="119;out/introduction.mdk:41"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#forrest09:slow" title="Brady Forrest. 
 Bing and google agree: Slow pages lose users." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">27</span></a>, <a href="#linden06:amazon" title="Greg Linden. 
-Make data useful." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">37</span></a>]</span><span data-line="119;out/introduction.mdk:42"></span>).  Worse,
-programmers must maintain this balance in an unpredictable environment
-where a black and blue dress<span data-line="119;out/introduction.mdk:44"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#buzzfeed-dress" title="Dao Nguyen. 
-What it&#39;s like to work on buzzfeed&#39;s tech team during record traffic." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">43</span></a>]</span><span data-line="119;out/introduction.mdk:44"></span> or Justin Bieber
-<span data-line="119;out/introduction.mdk:45"></span><span class="citations" style="target-element:bibitem">[<a href="#bieber-instagram" title="Cade Metz. 
-How Instagram Solved Its Justin Bieber Problem, November 2015." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">39</span></a>]</span><span data-line="119;out/introduction.mdk:45"></span> can change application performance in the blink of
+Make data useful." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">37</span></a>]</span><span data-line="119;out/introduction.mdk:41"></span>).  Worse, programmers
+must maintain this balance in an unpredictable environment where a
+black and blue dress<span data-line="119;out/introduction.mdk:43"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#buzzfeed-dress" title="Dao Nguyen. 
+What it&#39;s like to work on buzzfeed&#39;s tech team during record traffic." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">43</span></a>]</span><span data-line="119;out/introduction.mdk:43"></span> or Justin Bieber
+<span data-line="119;out/introduction.mdk:44"></span><span class="citations" style="target-element:bibitem">[<a href="#bieber-instagram" title="Cade Metz. 
+How Instagram Solved Its Justin Bieber Problem, November 2015." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">39</span></a>]</span><span data-line="119;out/introduction.mdk:44"></span> can change application performance in the blink of
 an eye.
 </p>
-<p class="p indent" data-line="119;out/introduction.mdk:48"><span data-line="119;out/introduction.mdk:48"></span>Recognizing this trade-off, many existing storage systems support
+<p class="p indent" data-line="119;out/introduction.mdk:47"><span data-line="119;out/introduction.mdk:47"></span>Recognizing this trade-off, many existing storage systems support
 configureable consistency levels; some allow programmers to set the
 consistency of the entire store or each operation
-<span data-line="119;out/introduction.mdk:51"></span><span class="citations" style="target-element:bibitem">[<a href="#cassandra" title="Apache Software Foundation. 
+<span data-line="119;out/introduction.mdk:50"></span><span class="citations" style="target-element:bibitem">[<a href="#cassandra" title="Apache Software Foundation. 
 Cassandra." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">4</span></a>, <a href="#riak" title="Basho Technologies, Inc. 
 Riak." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">11</span></a>, <a href="#li:12:redblue" title="Cheng Li, Daniel Porto, Allen Clement, Johannes Gehrke, Nuno Pregui&#231;a, and Rodrigo Rodrigues. 
 Making geo-replicated systems fast as possible, consistent when necessary. 
 In Presented as part of the 10th USENIX Symposium on Operating Systems Design and Implementation (OSDI 12), pages 265&#8211;278, Hollywood, CA, 2012. USENIX. 
 ISBN 978-1-931971-96-6. 
 URL https://&#8203;www.&#8203;usenix.&#8203;org/&#8203;conference/&#8203;osdi12/&#8203;technical-&#8203;sessions/&#8203;presentation/&#8203;li." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">35</span></a>, <a href="#sovran:11:walter" title="Yair Sovran, Russell Power, Marcos&#160;K. Aguilera, and Jinyang Li. 
-Transactional storage for geo-replicated systems." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">59</span></a>]</span><span data-line="119;out/introduction.mdk:51"></span>.  Ideally,
+Transactional storage for geo-replicated systems." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">59</span></a>]</span><span data-line="119;out/introduction.mdk:50"></span>.  Ideally,
 programs would only weaken consistency guarantees when necessary to
 meet availability requirements (e.g., during a spike in traffic or
-datacenter failure), or when it does not impact the application<span data-line="119;out/introduction.mdk:54"></span>&#39;<span data-line="119;out/introduction.mdk:54"></span>s
+datacenter failure), or when it does not impact the application<span data-line="119;out/introduction.mdk:53"></span>&#39;<span data-line="119;out/introduction.mdk:53"></span>s
 correctness guarantees (e.g., returning a slightly stale or estimated
-result is acceptable); some have supported adaptable consistency in
-this way<span data-line="119;out/introduction.mdk:57"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#stribling:09:wheelfs" title="Jeremy Stribling, Yair Sovran, Irene Zhang, Xavid Pretzer, Jinyang Li, M.&#160;Frans Kaashoek, and Robert Morris. 
+result is acceptable). Some storage systems support this type of
+adaptable consistency<span data-line="119;out/introduction.mdk:56"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#stribling:09:wheelfs" title="Jeremy Stribling, Yair Sovran, Irene Zhang, Xavid Pretzer, Jinyang Li, M.&#160;Frans Kaashoek, and Robert Morris. 
 Flexible, wide-area storage for distributed systems with WheelFS. 
 In Proceedings of the 6th USENIX Symposium on Networked Systems Design and Implementation (NSDI), NSDI&#39;09, pages 43&#8211;58, Berkeley, CA, USA, 2009. USENIX Association. 
 URL http://&#8203;dl.&#8203;acm.&#8203;org/&#8203;citation.&#8203;cfm?&#8203;id=&#8203;1558977.&#8203;1558981." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">60</span></a>, <a href="#terry:13:slas" title="Douglas&#160;B. Terry, Vijayan Prabhakaran, Ramakrishna Kotla, Mahesh Balakrishnan, Marcos&#160;K. Aguilera, and Hussam Abu-Libdeh. 
 Consistency-based service level agreements for cloud storage. 
 In Proceedings of the Twenty-Fourth ACM Symposium on Operating Systems Principles - SOSP 13. ACM Press, 2013. 
-doi:10.1145/2517349.2522731." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">62</span></a>]</span><span data-line="119;out/introduction.mdk:57"></span>.  Unfortunately, if
-programmers are <span data-line="119;out/introduction.mdk:58"></span><em class="em-star1">undisciplined</em><span data-line="119;out/introduction.mdk:58"></span> in their use of weakly consistent data
-they can corrupt stored data, lowering the consistency of the storage
-system to that of the weakest read or write operation.
+doi:10.1145/2517349.2522731." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">62</span></a>]</span><span data-line="119;out/introduction.mdk:56"></span>.
+Unfortunately, if programmers are <span data-line="119;out/introduction.mdk:57"></span><em class="em-star1">undisciplined</em><span data-line="119;out/introduction.mdk:57"></span> in their use of data
+from weakly consistent operations, they can corrupt strongly
+consistent stored data, lowering the consistency of the storage system
+to that of the weakest read or write operation.
 </p>
 <p class="p indent" data-line="119;out/introduction.mdk:62"><span data-line="119;out/introduction.mdk:62"></span>In this paper, we propose a more disciplined approach to consistency:
 the <span data-line="119;out/introduction.mdk:63"></span><em class="em-star1">inconsistent, performance-bound, approximate (IPA)</em><span data-line="119;out/introduction.mdk:63"></span> storage
@@ -471,15 +471,15 @@ explicit endorsement. IPA provides the following:
 <p data-line="119;out/introduction.mdk:69"><span data-line="119;out/introduction.mdk:69"></span><em class="em-star1">Error SLAs.</em><span data-line="119;out/introduction.mdk:69"></span> IPA is a data structure store, like Redis<span data-line="119;out/introduction.mdk:69"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#redis" title="Salvatore Sanfilippo. 
 Redis." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">55</span></a>]</span><span data-line="119;out/introduction.mdk:69"></span> or
  Riak<span data-line="119;out/introduction.mdk:70"></span>&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#riak" title="Basho Technologies, Inc. 
-Riak." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">11</span></a>]</span><span data-line="119;out/introduction.mdk:70"></span>, allowing it to provide both performance and error
- bounds (e.g., the programmer can bound the latency of a read or
- bound the returned value to within 5<span data-line="119;out/introduction.mdk:72"></span>%<span data-line="119;out/introduction.mdk:72"></span> of the correct
- value). Within these bounds, IPA automatically adapts to provide
- the strongest consistency possible under the current system load.
+Riak." class="bibref tex-tooltip localref" style="target-element:bibitem"><span class="cite-number">11</span></a>]</span><span data-line="119;out/introduction.mdk:70"></span>, allowing it to provide both traditional performance
+ bounds and novel error bounds (e.g., the programmer can bound the
+ returned value to within 5<span data-line="119;out/introduction.mdk:72"></span>%<span data-line="119;out/introduction.mdk:72"></span> of the correct value). Within these
+ bounds, IPA automatically adapts to provide the strongest
+ consistency possible under the current system load.
 </p></li>
 <li class="li ul-li list-star-li loose-li" data-line="119;out/introduction.mdk:76">
 <p data-line="119;out/introduction.mdk:76"><span data-line="119;out/introduction.mdk:76"></span><em class="em-star1">IPA consistency types.</em><span data-line="119;out/introduction.mdk:76"></span> IPA defines the consistency and correctness
- of every returned value using a consistency type system that allows
+ of every returned value using a new type system that allows
  programmers to reason about their use of data at different
  consistency levels and make decisions based on the actual
  consistency of returned values.
