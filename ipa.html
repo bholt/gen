@@ -555,22 +555,19 @@ displays each showing of the movie along with the number of tickets
 remaining.  For better performance, the programmer may want to weaken
 the consistency of the read operation that fetches the remaining
 ticket count to give users an estimate, instead of the most up-to-date
-value. This policy would allow the storage system to return the
-precise number under normal load and something less precise (e.g., a
-value within 5<span data-line="120;out/background.mdk:30"></span>%<span data-line="120;out/background.mdk:30"></span> of the actual value) under heavier traffic
-spikes.
+value.
+Under normal load, even with weak consistency, this count would often still be correct because propagation is typically fast compared to updates. However, eventual consistency makes no guarantees, so under heavier traffic spikes, the values could be significantly incorrect and the application has no way of knowing by how much. 
 </p>
-<p class="p indent" data-line="120;out/background.mdk:33"><span data-line="120;out/background.mdk:33"></span>While this solves the programmer<span data-line="120;out/background.mdk:33"></span>&#39;<span data-line="120;out/background.mdk:33"></span>s performance problem, it introduces
-a data consistency problem.  Suppose that, like Uber<span data-line="120;out/background.mdk:34"></span>&#39;<span data-line="120;out/background.mdk:34"></span>s surge pricing,
+<p class="p indent" data-line="120;out/background.mdk:31"><span data-line="120;out/background.mdk:31"></span>While this solves the programmer<span data-line="120;out/background.mdk:31"></span>&#39;<span data-line="120;out/background.mdk:31"></span>s performance problem, it introduces
+a data consistency problem.  Suppose that, like Uber<span data-line="120;out/background.mdk:32"></span>&#39;<span data-line="120;out/background.mdk:32"></span>s surge pricing,
 the ticket sales application wants to raise the price of the last 100
-tickets for each showing to <span data-line="120;out/background.mdk:36"></span>&#36;<span data-line="120;out/background.mdk:36"></span>15.  If the application uses a strongly
+tickets for each showing to <span data-line="120;out/background.mdk:34"></span>&#36;<span data-line="120;out/background.mdk:34"></span>15.  If the application uses a strongly
 consistent read to fetch the remaining ticket count, then it can use
 that value to compute the price of the ticket on the last screen in
-<span data-line="120;out/background.mdk:39"></span><a href="#fig-tickets" title="Ticket sales service. To meet a performance target in displayEvent, developer switches to a weak read for getTicketCount, not realizing that this inconsistent read will be used elsewhere to compute the ticket price. " class="tex-tooltip localref" style="target-element:fig"><span class="figure-label">Figure&#160;1</span></a><span data-line="120;out/background.mdk:39"></span>. However, if the programmer chose to weaken the
-consistency of that read, then they must be careful when using it to
-calculate a purchase. If done incorrectly, the application
-may over- or under-charge some users depending on the consistency of
-the returned value.  Worse, the theater expects to make <span data-line="120;out/background.mdk:43"></span>&#36;<span data-line="120;out/background.mdk:43"></span>1500 for
+<span data-line="120;out/background.mdk:37"></span><a href="#fig-tickets" title="Ticket sales service. To meet a performance target in displayEvent, developer switches to a weak read for getTicketCount, not realizing that this inconsistent read will be used elsewhere to compute the ticket price. " class="tex-tooltip localref" style="target-element:fig"><span class="figure-label">Figure&#160;1</span></a><span data-line="120;out/background.mdk:37"></span>. However, if the programmer reuses <span data-line="120;out/background.mdk:37"></span><code class="code code1">getTicketCount</code><span data-line="120;out/background.mdk:37"></span> which used a weak read to calculate the price, then this count could be arbitrarily wrong.
+The application
+could then over- or under-charge some users depending on the consistency of
+the returned value.  Worse, the theater expects to make <span data-line="120;out/background.mdk:40"></span>&#36;<span data-line="120;out/background.mdk:40"></span>1500 for
 those tickets with the new pricing model, which may not happen with
 the new weaker read operation.  Thus, programmers need to be careful
 in their use of values returned from storage operations with weak
@@ -578,7 +575,7 @@ consistency. Simply weakening the consistency of an operation may lead
 to unexpected consequences for the programmer (e.g., the theater not
 selling as many tickets at the higher surge price as expected).
 </p>
-<p class="p indent" data-line="120;out/background.mdk:51"><span data-line="120;out/background.mdk:51"></span><span id="todo" style="color:red;font-size:small;font-family:Lato-Light">[add a happy ending]</span><span data-line="120;out/background.mdk:51"></span>
+<p class="p indent" data-line="120;out/background.mdk:48"><span data-line="120;out/background.mdk:48"></span>In this work, we propose a programming model that can prevent using inconsistent values where they were not intended, as well as introduce mechanisms that allow the storage system to dynamically adapt consistency within predetermined performance and correctness bounds.
 </p><h2 id="sec-types" class="h1" data-line="121;out/types.mdk:1" data-heading-depth="1" style="display:block"><span data-line="121;out/types.mdk:1"></span><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span><span data-line="121;out/types.mdk:1"></span>Programming Model</h2><!-- Developers of distributed applications 
 today manually manage the consistency--performance trade-off.
 Managing these trade-offs is error-prone 
