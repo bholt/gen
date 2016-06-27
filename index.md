@@ -14,4 +14,4 @@ title: Claret Docs
 	</a>
 	{% endif %}
 {% endfor %}
-</ul>
+</div>
