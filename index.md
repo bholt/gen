@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Claret Docs
+title: Generated Docs
 ---
 
 <div class="list-group">
@@ -14,4 +14,4 @@ title: Claret Docs
 	</a>
 	{% endif %}
 {% endfor %}
-</ul>
+</div>
