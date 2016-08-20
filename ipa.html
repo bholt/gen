@@ -373,33 +373,13 @@
 <div class="authors align-center" data-line="136;out/abstract.mdk:3" style="text-align:center;width:80%;line-adjust:0"><table class="authorrow columns block" data-line="136;out/abstract.mdk:3" style="margin-top:2ex;width:100%;line-adjust:0">
 <tbody><tr><td class="author column" data-line="136;out/abstract.mdk:3" style="text-align:center;line-adjust:0">
 <div class="authorname" data-line="136;out/abstract.mdk:3" style="font-size:large;line-adjust:0"><span data-line="136;out/abstract.mdk:3"></span>Brandon Holt, James Bornholt, Irene Zhang, Dan Ports, Mark Oskin, Luis Ceze</div>
-<div class="authoraddress" data-line="136;out/abstract.mdk:6" style="line-adjust:0"><span data-line="136;out/abstract.mdk:6"></span><span style="font-size:small"><em class="em-star1">University of Washington</em></span></div>
-<div class="authoremail email" data-line="136;out/abstract.mdk:9" style="line-adjust:0"><span data-line="136;out/abstract.mdk:9"></span><span style="font-size:small">Submission Type: Research</span></div></td></tr></tbody></table></div></div>
+<div class="authoraddress" data-line="137" style="line-adjust:0"><span data-line="137"></span><span style="font-size:small"><em class="em-star1">University of Washington</em></span></div>
+<div class="authoremail email" data-line="140" style="line-adjust:0"><span data-line="140"></span><span style="font-size:small">Submission Type: Research</span></div></td></tr></tbody></table></div></div>
 <div class="abstract" data-line="135" style="margin-left:3em;margin-right:3em;font-size:small">
 <p class="p noindent" data-line="136;out/abstract.mdk:1"><span data-line="136;out/abstract.mdk:1"></span><strong class="strong-star2">Abstract.</strong><span data-line="136;out/abstract.mdk:1"></span> 
-Distributed applications and web services, such as online stores or
-social networks, are expected to be scalable, available, responsive,
-and fault-tolerant. To meet these steep requirements in the face of
-high round-trip latencies, network partitions, server failures, and
-load spikes, applications use eventually consistent datastores that
-allow them to weaken the consistency of some data.  However, making
-this transition is highly error-prone because relaxed consistency
-models are notoriously difficult to understand and test.
+Distributed applications and web services, such as online stores or social networks, are expected to be scalable, available, responsive, and fault-tolerant. To meet these steep requirements in the face of high round-trip latencies, network partitions, server failures, and load spikes, applications use eventually consistent datastores that allow them to weaken the consistency of some data.  However, making this transition is highly error-prone because relaxed consistency models are notoriously difficult to understand and test.
 </p>
-<p class="p indent" data-line="136;out/abstract.mdk:11"><span data-line="136;out/abstract.mdk:11"></span>In this work, we propose a new programming model for distributed data
-that makes consistency properties explicit and uses a type system to
-enforce <span data-line="136;out/abstract.mdk:13"></span><em class="em-star1">consistency safety</em><span data-line="136;out/abstract.mdk:13"></span>. With the <span data-line="136;out/abstract.mdk:13"></span><em class="em-star1">Inconsistent,
-Performance-bound, Approximate</em><span data-line="136;out/abstract.mdk:14"></span> (IPA) storage system, programmers
-specify performance targets and correctness requirements as
-constraints on persistent data structures and handle uncertainty about
-the result of datastore reads using new <span data-line="136;out/abstract.mdk:17"></span><em class="em-star1">consistency types</em><span data-line="136;out/abstract.mdk:17"></span>.  We
-implement a prototype of this model in Scala on top of an existing
-datastore, Cassandra, and use it to make performance/correctness
-tradeoffs in two applications: a ticket sales service and a Twitter
-clone. Our evaluation shows that IPA prevents consistency-based
-programming errors and adapts consistency automatically in response to
-changing network conditions, performing comparably to weak consistency
-and 2-10<span data-line="136;out/abstract.mdk:24"></span><span class="math-inline">$\times$</span><span data-line="136;out/abstract.mdk:24"></span> faster than strong consistency.
+<p class="p indent" data-line="136;out/abstract.mdk:4"><span data-line="136;out/abstract.mdk:4"></span>In this work, we propose a new programming model for distributed data that makes consistency properties explicit and uses a type system to enforce <span data-line="136;out/abstract.mdk:4"></span><em class="em-star1">consistency safety</em><span data-line="136;out/abstract.mdk:4"></span>. With the <span data-line="136;out/abstract.mdk:4"></span><em class="em-star1">Inconsistent, Performance-bound, Approximate</em><span data-line="136;out/abstract.mdk:4"></span> (IPA) storage system, programmers specify performance targets and correctness requirements as constraints on persistent data structures and handle uncertainty about the result of datastore reads using new <span data-line="136;out/abstract.mdk:4"></span><em class="em-star1">consistency types</em><span data-line="136;out/abstract.mdk:4"></span>. We implement a prototype of this model in Scala on top of an existing datastore, Cassandra, and use it to make performance/correctness tradeoffs in two applications: a ticket sales service and a Twitter clone. Our evaluation shows that IPA prevents consistency-based programming errors and adapts consistency automatically in response to changing network conditions, performing comparably to weak consistency and 2-10<span data-line="136;out/abstract.mdk:4"></span><span class="math-inline">$\times$</span><span data-line="136;out/abstract.mdk:4"></span> faster than strong consistency.
 </p></div><h2 id="sec-introduction" class="h1" data-line="147;out/introduction.mdk:1" data-heading-depth="1" style="display:block"><span data-line="147;out/introduction.mdk:1"></span><span class="heading-before"><span class="heading-label">1</span>.&#8194;</span><span data-line="147;out/introduction.mdk:1"></span>Introduction</h2><!--
 ~~ Notes
 - obviously applications would like to ensure correctness,
